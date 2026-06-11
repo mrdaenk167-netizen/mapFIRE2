@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "mapFIRE",
+    "slug": "mapfire",
+    "version": "1.0.0",
+    "sdkVersion": "54.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": false,
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f1117"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f1117"
+      },
+      "package": "com.damkar.mapfire"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.damkar.mapfire"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "mapFIRE memerlukan akses lokasi untuk navigasi peta.",
+          "locationAlwaysAndWhenInUsePermission": "mapFIRE memerlukan akses lokasi untuk navigasi peta."
+        }
+      ]
+    ]
+  }
+}
