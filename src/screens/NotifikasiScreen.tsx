@@ -52,7 +52,13 @@ export default function NotifikasiScreen({
   route:      Route;
 }): React.JSX.Element {
   const insets = useSafeAreaInsets();
-  const notifikasi = route.params?.notifikasi ?? [];
+  const allNotifikasi = route.params?.notifikasi ?? [];
+  
+  // Filter notifikasi hanya 1 jam terakhir (waspada + bahaya)
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+  const notifikasi = allNotifikasi.filter(
+    n => new Date(n.waktu) >= oneHourAgo && (n.status === 'waspada' || n.status === 'bahaya'),
+  );
 
   const renderItem: ListRenderItem<NotifikasiItem> = ({ item }) => (
     <NotifCard
@@ -83,7 +89,7 @@ export default function NotifikasiScreen({
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
           <Text style={{ fontSize: 24, color: COLORS.text_secondary }}>‹</Text>
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Riwayat Notifikasi</Text>
+        <Text style={styles.headerTitle}>Riwayat Notifikasi (1 Jam)</Text>
         {notifikasi.length > 0 && (
           <View style={styles.countBadge}>
             <Text style={styles.countTxt}>{notifikasi.length}</Text>

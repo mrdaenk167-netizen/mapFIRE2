@@ -2,7 +2,11 @@
 
 export type StatusSensor = 'aman' | 'waspada' | 'bahaya';
 
-export type BrokerStatus = 'connected' | 'disconnected' | 'reconnecting' | 'error';
+export type BrokerStatus =
+  | 'connected'
+  | 'disconnected'
+  | 'reconnecting'
+  | 'error';
 
 // Data satu rumah warga dari config
 export interface RumahConfig {
@@ -61,12 +65,59 @@ export interface UseMQTTReturn {
   sensorList: RumahSensor[];
   summary: Summary;
   notifikasi: NotifikasiItem[];
+  notifikasiTerbaru: NotifikasiItem[];
+}
+
+// Data user/petugas dari Firestore
+export type UserRole = 'admin' | 'petugas' | 'user';
+
+export type UserStatus = 'active' | 'inactive' | 'blocked';
+
+export interface PetugasUser {
+  uid: string;
+  nama: string;
+  email: string;
+  role: UserRole;
+  status: UserStatus;
+  canAccess: boolean;
+  jabatan?: string;
+  username?: string;
+  createdAt?: unknown;
+  lastLoginAt?: unknown;
+}
+
+// Input create account
+export interface RegisterUserInput {
+  nama: string;
+  email: string;
+  password: string;
+}
+
+// Data login sederhana yang bisa dikirim ke MainTabs
+export interface MainTabsParams {
+  petugas?: {
+    uid?: string;
+    username?: string;
+    nama: string;
+    email?: string;
+    jabatan?: string;
+    role?: UserRole;
+  };
 }
 
 // Navigation params
 export type RootStackParamList = {
   Login: undefined;
-  MainTabs: { petugas: { username: string; nama: string; jabatan: string } };
-  Detail: { rumah: RumahSensor };
-  Notifikasi: { notifikasi: NotifikasiItem[] };
+
+  // Dibuat optional supaya navigation.replace('MainTabs') tidak error
+  // dan tetap bisa menerima data petugas kalau ingin dikirim.
+  MainTabs: MainTabsParams | undefined;
+
+  Detail: {
+    rumah: RumahSensor;
+  };
+
+  Notifikasi: {
+    notifikasi: NotifikasiItem[];
+  };
 };

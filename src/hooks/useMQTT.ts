@@ -89,11 +89,18 @@ export function useMQTT(): UseMQTTReturn {
     { aman: 0, waspada: 0, bahaya: 0, total: 0 },
   );
 
+  // Filter notifikasi hanya dari 1 jam terakhir (waspada + bahaya)
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+  const notifikasiTerbaru = notifikasi.filter(
+    n => new Date(n.waktu) >= oneHourAgo && (n.status === 'waspada' || n.status === 'bahaya'),
+  );
+
   return {
     brokerStatus,
     sensorData,
     sensorList: Object.values(sensorData),
     summary,
     notifikasi,
+    notifikasiTerbaru,
   };
 }

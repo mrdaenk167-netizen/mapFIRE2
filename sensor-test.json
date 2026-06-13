@@ -1,0 +1,27 @@
+{
+  "sensors": {
+    "rumah_001": {
+      "suhu": 32,
+      "asap": 20,
+      "co": 8,
+      "status": "aman",
+      "lastUpdate": 1710000000000
+    }
+  },
+  "sensorHistory": {
+    "rumah_001": {
+      "1710000000000": {
+        "suhu": 30,
+        "asap": 18,
+        "co": 6,
+        "status": "aman"
+      },
+      "1710000060000": {
+        "suhu": 32,
+        "asap": 20,
+        "co": 8,
+        "status": "aman"
+      }
+    }
+  }
+}
